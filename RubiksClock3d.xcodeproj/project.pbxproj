@@ -2090,7 +2090,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "14769BF5-2D83-4F8F-8B5E-456139DA1A34";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "i386 armv6 armv7 armv7s";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -2143,7 +2143,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E2DEA8E9-F66F-4EF2-8622-E6E353079694";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "i386 armv6 armv7 armv7s";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -2170,7 +2170,7 @@
 				PRODUCT_NAME = RubiksClock3d;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				VALID_ARCHS = "arm64 armv7 armv7s";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2197,7 +2197,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "arm64 armv7 armv7s";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
