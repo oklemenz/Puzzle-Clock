@@ -10,9 +10,9 @@ Try to solve the puzzle as fast as you can to achieve the best time in the Game 
 # Algorithm 
 
 
-Reference: [Rubik's Clock]("./Resources/Algorithm/Rubik's Clock.pdf")
+Reference: [Rubik's Clock](./Resources/Algorithm/Rubik's Clock.pdf)
 
-```
+```js
 module.exports = class Clock {
     
     constructor() {
