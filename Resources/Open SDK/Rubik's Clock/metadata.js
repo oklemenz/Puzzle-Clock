@@ -1,1 +1,0 @@
-{"description":"My First Jiggy App","version":"v1.0","author":"Oliver Klemenz","url":""}
