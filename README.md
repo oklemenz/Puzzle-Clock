@@ -12,6 +12,7 @@ Try to solve the puzzle as fast as you can to achieve the best time in the Game 
 
 Reference: [Rubik's Clock](./Resources/Algorithm/RubiksClock.pdf)
 
+**clock.js**
 ```js
 module.exports = class Clock {
 
@@ -32,19 +33,11 @@ module.exports = class Clock {
         if (wheel < 0 || wheel >= 4) {
             return;
         }
-        let b0 = this.buttons[0];
-        let b1 = this.buttons[1];
-        let b2 = this.buttons[2];
-        let b3 = this.buttons[3];
-        let t0, t1;
-        switch (wheel) {
-            case 0: t0 = false; t1 = false; break;
-            case 1: t0 = false; t1 = true; break;
-            case 2: t0 = true; t1 = false; break;
-            case 3: t0 = true; t1 = true; break;
-        }
+        let [b0, b1, b2, b3] = this.buttons;
+        const t0 = wheel === 2 || wheel == 3;
+        const t1 = wheel === 1 || wheel == 3;
+        const d = [];
         for (let i = 0; i < 2; i++) {
-            const d = Array(9).fill(false);
             d[0] = (!t0 && !t1) || ((b0 == b1) && !t0) || ((b0 == b2) && t0 && !t1) || ((b0 == b3) && t0 && t1);
             d[1] = (((!t0 && !t1) || (b3 && t0 && t1)) && b0) || ((b3 || !t0) && b1 && t1) || (((!b0 && b1) || b0) && b2 && t0 && !t1);
             d[2] = (!t0 && t1) || ((b1 == b0) && !t0) || ((b1 == b2) && t0 && !t1) || ((b1 == b3) && t1);
@@ -56,7 +49,7 @@ module.exports = class Clock {
             d[8] = (t0 && t1) || ((b3 == b0) && !t0 && !t1) || ((b3 == b1) && t1) || ((b3 == b2) && t0);
             for (let j = 0; j < 9; j++) {
                 if (d[j]) {
-                    this.clocks[j + 9 * i] = (this.clocks[j + 9 * i] += num) % 12 < 0 ? this.clocks[j + 9 * i] % 12 + 12 : this.clocks[j + 9 * i] % 12;
+                    this.clocks[j + 9 * i] = (this.clocks[j + 9 * i] + num + 12) % 12;
                 }
             }
             num = -num;
@@ -67,16 +60,46 @@ module.exports = class Clock {
         }
         return this;
     }
+
+    show() {
+        let result = "";
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                result += (this.clocks[i * 3 + j] < 11 ? this.clocks[i * 3 + j] : "\u2016") + " ";
+            }
+            result += "  ";
+            for (let j = 2; j >= 0; j--) {
+                result += (this.clocks[i * 3 + j] < 11 ? this.clocks[i * 3 + j] : "\u2016") + " ";
+            }
+            result += "\n";
+            if (i == 0) {
+                result += ` ${this.buttons[0] ? "*" : "o"} ${this.buttons[1] ? "*" : "o"}`;
+                result += `     ${this.buttons[1] ? "*" : "o"} ${this.buttons[0] ? "*" : "o"}`;
+            } else if (i == 1) {
+                result += ` ${this.buttons[2] ? "*" : "o"} ${this.buttons[3] ? "*" : "o"}`;
+                result += `     ${this.buttons[3] ? "*" : "o"} ${this.buttons[2] ? "*" : "o"}`;
+            }
+            result += "\n";
+        }
+        return result;
+    }
 }
 ```
 
 Usage:
 
-```
-const Clock = require("./Clock.js")
+**index.js**
+```js
+const Clock = require("./clock.js")
 const clock = new Clock();
 clock.push(0);
 clock.turn(0, 1);
+clock.show();
+// 1 1 0   0 1 1 
+//  * o     o *
+// 1 1 0   0 1 1 
+//  o o     o o
+// 0 0 0   0 0 0 
 ```
 
 # Download
